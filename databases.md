@@ -736,6 +736,7 @@ WHERE
 #### SELECT without joins
 
 We could also recombine our data without explicitly using a JOIN
+
 Technically this is the same as an inner join, but the syntax is slightly different...
 
 ```
@@ -747,6 +748,44 @@ WHERE
   `answers`.`user_id` = `users`.`id`
 ```
 
+#### Multiple tables in a query
+
+We have learnt how to query across multiple tables, by matching primary and foreign keys
+
+When we query across multiple tables, the attributes from each table are flattened into a single table
+
+There may be times when there are fields that we want to retrieve that have identical column names in more than one table (for example 'id')
+
+If we try to do this, it will only retrieve one of the named columns - the other won't be present in the results
+
+```
+SELECT
+  `questions`.`question`,
+  `questions`.`id`,
+  `answers`.`answer`,
+  `answers`.`id`
+FROM
+  `questions`,
+  `answers`
+WHERE
+  `questions`.`id` = `answers`.`question_id`
+```
+
+To resolve this we use AS in our SQL to alias the field names to something else, to make them unique
+
+```
+SELECT
+  `questions`.`question`,
+  `questions`.`id` AS `question_id`,
+  `answers`.`answer`,
+  `answers`.`id` AS `answer_id`
+FROM
+  `questions`,
+  `answers`
+WHERE
+  `questions`.`id` = `answers`.`question_id`
+```
+
 ***Further reading:***
 
  - [http://codular.com/sql-introduction](http://codular.com/sql-introduction)
@@ -754,6 +793,93 @@ WHERE
  - [http://en.wikipedia.org/wiki/Join_(SQL)](http://en.wikipedia.org/wiki/Join_(SQL))
  - [http://www.keithjbrown.co.uk/vworks/mysql/mysql_p5.php](http://www.keithjbrown.co.uk/vworks/mysql/mysql_p5.php)
  - [http://www.coderecipes.net/sql-join-inner-join-left-join.aspx](http://www.coderecipes.net/sql-join-inner-join-left-join.aspx)
+
+
+#### Retrieving Random Results With MySQL
+
+You can select a random entry from a MySQL table using the SQL `RAND()` command
+
+Add `ORDER BY RAND() LIMIT 0,1` to the end of a query:
+
+```
+SELECT * FROM `questions` ORDER BY RAND() LIMIT 0,1
+```
+
+Could be useful for selecting a random question to feature on a page
+
+
+#### Grouping results
+
+If you wanted to select a list of all answers for each question, you could perform the following query:
+
+```
+SELECT
+  `questions`.`question` ,
+  `answers`.`answer`
+FROM
+  `questions` ,
+  `answers`
+WHERE
+  `questions`.`id` = `answers`.`question_id`
+```
+
+This will produce the following results:
+
+| question         | answer        |
+|------------------|---------------|
+| Favourite Cheese | Edam          |
+| Favourite Prince | Fresh         |
+| Favourite Prince | TAFKAP        |
+| Favourite Cheese | Melted cheese |
+
+This will repeat the question each time for each answer
+
+To group the answers together in a single column:
+
+```
+SELECT
+  `questions`.`question ,
+  GROUP_CONCAT(`answers`.`answer` SEPARATOR ', ') AS `answer_list`
+FROM
+  `questions` ,
+  `answers`
+WHERE
+  `questions`.`id` = `answers`.`question_id`
+GROUP BY `questions`.`id`
+```
+
+This will produce the following results:
+
+| question         | answer              |
+|------------------|---------------------|
+| Favourite Cheese | Edam, Melted cheese |
+| Favourite Prince | Fresh, TAFKAP       |
+
+
+If you want to perform complex queries on your database, it is also worth investigating different types of database joins and sub-queries
+
+
+#### Formatting A Date With MySQL
+
+We've been storing dates in MySQL using the 'date', 'time' and 'datetime' data types
+
+When these are retrieved from MySQL:
+
+```
+SELECT `date_added` FROM `answers`;
+```
+
+The output is in the format: "2012-02-27 15:20:29"
+
+If you want to format this you can use DATE_FORMAT
+
+```
+SELECT DATE_FORMAT(`date_added`, '%e/%c/%y, %k:%i' AS `date_added_formatted` FROM `answers`;
+```
+
+***Further information:***
+
+ - [http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html#function_date-format](http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html#function_date-format)
 
 
 ## Practice
