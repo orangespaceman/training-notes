@@ -505,9 +505,14 @@ INSERT INTO `table_name` (`columnName1`, `columnName2`) VALUES ('value1', 'value
 The second version allows us to insert multiple rows (separated by commas) in a single SQL statement
 
 ```
-INSERT INTO `table_name` (`columnName1`, `columnName2`)
-  VALUES ('value1', 'value2'), ('value1', 'value2'),
-('value1', 'value2'), ('value1', 'value2'), ('value1', 'value2');
+INSERT INTO
+  `table_name` (`columnName1`, `columnName2`)
+VALUES
+  ('value1', 'value2'),
+  ('value1', 'value2'),
+  ('value1', 'value2'),
+  ('value1', 'value2'),
+  ('value1', 'value2');
 ```
 
 

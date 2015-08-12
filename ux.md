@@ -4,7 +4,7 @@ A few notes prepared while writing training courses...
 
 ## What is UX?
 
-A typical project can be seen as a collaboration between business owners, users and developers
+A typical project can be seen as a collaboration between business owners, users and designers/developers
 
 Typically in the past users weren't consulted in the process
 
@@ -22,7 +22,7 @@ There are the three key areas of UX:
 
 Identify users, carry out product testing
 
-Can be qualitative (interviews) or quantitative (surveys), behavioural (observations) or attitudinal (interviews) 
+Can be qualitative (interviews) or quantitative (surveys), behavioural (observations) or attitudinal (interviews)
 
 
 ### Information architecture
@@ -62,7 +62,7 @@ There are five key areas of usability to consider:
 ### Memorability
 
  - Does the product rely on a user's recognition or recall of how to use it?
- - Don't create a product that requires a user to remember things 
+ - Don't create a product that requires a user to remember things
  - Make the product do the work, not the user
 
 

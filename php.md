@@ -376,9 +376,10 @@ The function `count()` returns the total number of elements in the array:
 echo count($planets); // === 8
 ```
 
+
 #### Associative Arrays
 
-These are arrays with non-numeric indices
+These are arrays with non-numeric indexes
 
 ```
 $earth = array(
@@ -396,6 +397,9 @@ echo $earth["radius"]; // === 6371
 Associative arrays are often used when we want to store more complex collections of data
 
 The value to the left of the `=>` operator is the index, the value to the right is the item's value
+
+
+#### Why we use Arrays
 
 Arrays are a handy way to store and use information
 
@@ -474,7 +478,7 @@ When trying to import a file with `require` or `require_once`, if the file doesn
 
 ### Control Structures
 
-PHP can perform a specific action only if certain conditions are met
+PHP can be used to perform a specific action only when certain conditions are met
 
 The main types of conditional logic structures are:
 
@@ -567,11 +571,11 @@ The result:
 <p>Planet 7 = Neptune</p>
 ```
 
-Starts with the array to iterate through, followed by the keyword as, followed by two variables — the first is assigned the index of the element and the second is assigned the value of that index’s element.
+Starts with the array to iterate through, followed by the keyword `as`, followed by two variables — the first is assigned the index of the element and the second is assigned the value of that index’s element.
 
-(If only one variable is listed after as, it is assigned the value of the array element.)
+(If only one variable is listed after `as`, it is assigned the value of the array element.)
 
-In our example, the foreach instruction moves through the array `$planets`, assigning each element in turn to the variable `$planet`
+In our example, the `foreach` instruction moves through the array `$planets`, assigning each element in turn to the variable `$planet`
 
 
 ### Forms
@@ -591,7 +595,7 @@ Here's a basic HTML form:
 </form>
 ```
 
-There are two important attributes on a form: action and method:
+There are two important attributes on a form: `action` and `method`:
 
 
 #### Action
@@ -660,7 +664,7 @@ Errors with PHP are far more common than with HTML/CSS:
 
 ### Working with arrays
 
-With simple variables like strings and numbers, we can echo their value at any point to see what they currently contain:
+With simple variables like strings and numbers, we can `echo` their value at any point to see what they currently contain:
 
 ```
 $planets = 5;
@@ -835,7 +839,7 @@ $planets = array(
 );
 ```
 
-We call arrays that contain other arrays *Multi-dimensional arrays*
+We call arrays that contain other arrays *multi-dimensional arrays*
 
 We can access values from within the arrays in the same way as before:
 
@@ -843,18 +847,26 @@ We can access values from within the arrays in the same way as before:
 foreach ($planets as $planetName => $planetData) {
   echo "<p>". $planetName . " size = " . $planetData["size"] . "</p>";
 }
-mercury size = 0.3
-venus size = 0.9
-earth size = 1
+```
+
+This results in:
+
+```
+<p>mercury size = 0.3</p>
+<p>venus size = 0.9</p>
+<p>earth size = 1</p>
 ```
 
 The ability to create multi-dimensional arrays is useful as it allows us to use a more complex information structure
 
 In most real-world examples, the data you'll be using will be more complex than a simple row of information
 
-While we're working this out, the print_r() function we saw earlier will allow us to preview all of the values in the array
+While we're working this out, the `print_r()` function we saw earlier will allow us to preview all of the values in the array
 
-One way to access all information within a multi-dimensional array is to use a foreach loop within another foreach loop
+
+#### Nested foreach loops
+
+One way to access all information within a multi-dimensional array is to use a `foreach` loop within another `foreach` loop
 
 ```
 foreach ($planets as $planetName => $planetData) {
@@ -880,16 +892,26 @@ foreach($planets as $planetName => $planetData) {
 }
 ```
 
+This results in links being generated:
+
+```
+<li><a href="?planet=mercury">mercury</a></li>
+<li><a href="?planet=venus">venus</a></li>
+<li><a href="?planet=earth">earth</a></li>
+```
+
+Next we'll learn how to use these links to display planet-specific data
+
 
 ### Superglobal variables
 
-Super-global variables are special variables that are automatically created by PHP.
+Superglobal variables are special variables that are automatically created by PHP.
 
 They are associative arrays that contain values acquired from user input or the server
 
-They are called super-global because they are accessible in any variable scope (more on this later)
+They are called superglobal because they are accessible in any variable scope (more on this later)
 
-The important super-global arrays:
+The important superglobal arrays:
 
  - `$_SERVER`
  - `$_GET`
@@ -935,13 +957,53 @@ Don't forget when you add an `&` in your HTML you should add `&amp;` or it won't
 
 This is a useful way to pass simple variables around between different pages
 
-Back to our planets example, so far we have a list of every planet name
+Back to our planets example, so far we have a list of links, one for each planet name
 
-We created links that will append the selected planet name to the URL
+These links append the selected planet name to the URL
 
-When a planet has been selected, `$_GET['planet']` will have a value
+When a planet link has been clicked, `$_GET['planet']` will have a value
 
 We can use this, combined with a simple if/else statement checking whether the variable has been set, to detect whether to display the overview list or detail view
+
+
+```
+<?php
+  // planets array, details displayed above...
+  $planets = array(...);
+
+  // has a planet been selected?
+  if (!empty($_GET['planet'])) {
+
+    // save the variable (quicker to not reference the GET array each time!)
+    $planet = $_GET['planet'];
+?>
+  <p>You have selected planet <strong><?php echo $planet; ?></strong>. Here are its details:</p>
+  <ul>
+<?php
+
+    // loop through each of the planet's attributes
+    foreach ($planets[$planet] as $key => $value) {
+      echo '<li><strong>'.$key.'</strong>: <em>'.$value.'</em></li>';
+    }
+
+?>
+  </ul>
+<?php
+  } else {
+?>
+    <p>Select a planet to see its details...</p>
+    <ul>
+<?php
+
+    foreach($planets as $planetName => $planetData) {
+      echo '<li><a href="?planet='.$planetName.'">'.$planetName.'</a></li>';
+    }
+?>
+    </ul>
+<?php
+  }
+?>
+```
 
 
 ### $_SERVER
@@ -990,7 +1052,7 @@ They can be saved for a single browser session (until you close the browser), or
 
 They can be read and written by PHP and JavaScript
 
-If any cookies exist for the site in question, they are available to the `$_COOKIE` super-global variable
+If any cookies exist for the site in question, they are available to the `$_COOKIE` superglobal variable
 
 (JavaScript can access the same cookies by referencing the `document.cookie` object)
 
@@ -1058,13 +1120,13 @@ Put this at the very start of a php file:
 ```
 <?php
 
-session_start();
+  session_start();
 
-  // .. the rest of the code starts here
+  // ... the rest of the code starts here
 ?>
 ```
 
-Once a session has been started, we can reference variables using the `$_SESSION` super-global array
+Once a session has been started, we can reference variables using the `$_SESSION` superglobal array
 
 Session variables can be assigned to or retrieved from the `$_SESSION` associative array at any time
 
@@ -1081,7 +1143,7 @@ echo $_SESSION['username'];
 
 Once you set a session variable, it will exist until you remove it or end the browser session
 
-To remove a session variable, useunset()
+To remove a session variable, use `unset()`
 
 ```
 unset($_SESSION['username']);
@@ -1100,7 +1162,7 @@ Use sessions rather than cookies:
 
 ### Connecting to a MySQL Database with PHP
 
-To connect to a MySQL database with PHP we use a class called mysqli
+To connect to a MySQL database with PHP we use a _class_ called `mysqli`
 
 The line of PHP code we need to do this is:
 
@@ -1108,7 +1170,7 @@ The line of PHP code we need to do this is:
 $db = new mysqli("host", "username", "password", "database");
 ```
 
-We can create a simple PHP script to test to see if we can connect to the database correctly
+We can create a simple PHP script to test to see if we can connect to the database correctly:
 
 ```
 // connect
@@ -1132,11 +1194,11 @@ An explanation of the database connection code:
  - If there was an error connecting then we display it
  - Otherwise the database connection was successful!
 
-Note that from now on in these examples I'm going to store the connection details in a separate file for convenience
+Note that from now on in these examples it is assumed that the database connection is active
 
-I've also created a generic header and footer PHP file, and a CSS file
+It is often a good idea to keep connection details in a separate file for convenience
 
-I'll import the PHP files into future scripts using require_once
+This file can be imported at the start of every page, using `require_once`
 
 This approach means you only need to update the content for these in one place
 
@@ -1215,7 +1277,7 @@ We're going to deal with each result individually, looping through them one by o
 
 We will use a `while()` loop, which is similar in many ways to the `foreach()` loops that we've seen previously
 
-The while loop will set the variable $row to an array containing the values of the current row in the table
+The while loop will set the variable `$row` to an array containing the values of the current row in the table
 
 The `$row` array keys will be the table column names
 
@@ -1227,7 +1289,7 @@ echo $row['answer'];        // 'Edam'
 echo $row['date_added'];    // '2013-03-19 18:34:23'
 ```
 
-When the script reaches the end of the while loop - the closing } - it will go back to the start of the while loop, but this time the value of $row will be set to the next row in the table
+When the script reaches the end of the while loop - the closing `}` - it will go back to the start of the while loop, but this time the value of `$row` will be set to the next row in the table
 
 This will continue until it has run through every row that has been returned by the SQL query
 
@@ -1283,7 +1345,7 @@ We can also write PHP scripts to create, update and delete data with SQL
 
 These examples use a value called `affected_rows` to test how many rows (if any) they have changed in the database
 
-To check that they have changed the data, we'll go back and look at one of the `SELECT` examples
+To check that they have changed the data, we could go back and look at one of the `SELECT` examples again
 
 
 #### INSERT
@@ -1291,7 +1353,10 @@ To check that they have changed the data, we'll go back and look at one of the `
 This SQL command will add a new entry to the `questions` table:
 
 ```
-INSERT INTO `questions` (`id`, `question`, `date_added`) VALUES (3, 'Favourite Fish', 2013-03-25 18:34:13);
+INSERT INTO
+  `questions` (`id`, `question`, `date_added`)
+VALUES
+  (3, 'Favourite Fish', 2013-03-25 18:34:13);
 ```
 
 This can be executed by a PHP script in a similar way to the SELECT commands we saw earlier
@@ -1305,8 +1370,7 @@ $result = $db->query($query);
 if ($result) {
 
   // output a count of how many rows were changed
-  echo "SQL successful, affected rows: "
-  . $db->affected_rows;
+  echo "SQL successful, affected rows: " . $db->affected_rows;
 
 // there was an SQL error
 } else {
@@ -1334,8 +1398,7 @@ $result = $db->query($query);
 if ($result) {
 
   // output a count of how many rows were changed
-  echo "SQL successful, affected rows: "
-  . $db->affected_rows;
+  echo "SQL successful, affected rows: " . $db->affected_rows;
 
 // there was an SQL error
 } else {
@@ -1363,8 +1426,7 @@ $result = $db->query($query);
 if ($result) {
 
   // output a count of how many rows were changed
-  echo "SQL successful, affected rows: "
-  . $db->affected_rows;
+  echo "SQL successful, affected rows: " . $db->affected_rows;
 
 // there was an SQL error
 } else {
@@ -1398,9 +1460,9 @@ while ($row = $result->fetch_assoc()) {
 }
 ```
 
-The while loop will set the variable $row to an array containing the values of the current row in the table
+The while loop will set the variable `$row` to an array containing the values of the current row in the table
 
-The $row array keys will be the table column names
+The `$row` array keys will be the table column names
 
 The first time the while loop is run, the following values are present
 
@@ -1422,9 +1484,9 @@ $result = $db->query($query);
 // loop through each result one at a time
 while ($row = $result->fetch_assoc()) {
     echo '
-      <p>Answer ' . $row['id'] . ' = ' .
-      $row['answer'] . ' (added on ' .
-      $row['date_added'] . ')</p>
+      <p>
+        Answer ' . $row['id'] . ' = ' . $row['answer'] . ' (added on ' . $row['date_added'] . ')
+      </p>
     ';
 }
 ```
@@ -1433,7 +1495,7 @@ while ($row = $result->fetch_assoc()) {
 
 You may only want to display results if there are any to display
 
-To do this you can use `num_rows()` to count the number of rows that have been returned
+To do this you can use `num_rows` to count the number of rows that have been returned
 
 
 ```
@@ -1464,7 +1526,7 @@ We can use PHP to adjust our SQL queries dynamically by using variables, rather 
 For example, we could use an HTML form to allow a user to enter a value, then search our database for this
 
 ```
-$query = "SELECT * FROM `answers` WHERE `answer` LIKE '%".$_GET['suggestion']."%''";
+$query = "SELECT * FROM `answers` WHERE `answer` LIKE '%" . $_GET['suggestion'] . "%''";
 ```
 
 
@@ -1635,7 +1697,7 @@ Consider putting this code into a separate file and including it every time you 
  - Additionally, you could then use functions to reference each one as and when you need it (We'll look at functions a little later on)
 
 
-### Header Include Files And Page Titles
+### Header include files and page titles
 
 We've seen examples of header and footer include files:
 
@@ -1670,7 +1732,7 @@ Functions are useful because you can write them once, then use them wherever and
 There are two types of function:
 
  - Those that are native (built-in) to the language already
- - Functions that we write ourselves - or alternatively 'third-party' functions that someone else has written, we can include and use them
+ - Functions that we write ourselves - or alternatively 'third-party' functions that someone else has written that we can include and use
 
 
 #### Native functions
@@ -1681,7 +1743,7 @@ There are lots of built-in functions in PHP which allow us to easily perform a s
  - `mail()` - Send an email
  - `scandir()` - List all files and folders in a specific directory on the web server
 
-There is a comprehensive list at php.net - using the search box is a good place to start
+There is a comprehensive list at [php.net](http://php.net) - using the search box is a good place to start
 
 
 #### Third-party functions
@@ -1709,7 +1771,7 @@ function doSomething() {
 
 As you build a website, you may start to notice situations where a function could help
 
-How you define a function
+How you define a function:
 
 ```
 function name() {
@@ -1777,9 +1839,7 @@ In the real world you are likely to use more complex functions
 
 You could use functions to move some of the code you're writing into separate files
 
-For example, you could create a function that checks whether the current user is logged in
-
-Something like this could be used at the top of every page of a website to determine whether to show content for a logged-in user or a member of the public
+For example, you could create a function that checks whether the current user is logged in. Something like this could be used at the top of every page of a website to determine whether to show content for a logged-in user or a member of the public
 
 ***Further information:***
 
@@ -1834,17 +1894,14 @@ To change the case of a text string we can use `strtolower()` or `strtoupper()`
 $firstname = "Pete";
 $surname = "Goodman";
 
-echo "<p>" .
-  strtolower($firstname) . " " .
-  strtoupper($surname) .
-"</p>";
+echo "<p>" . strtolower($firstname) . " " .strtoupper($surname) . "</p>";
 
 // <p>pete GOODMAN</p>
 ```
 
 #### Limiting characters
 
-To limit text to a certain number of characters we can use substr()
+To limit text to a certain number of characters we can use `substr()`:
 
 ```
 $text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
@@ -1860,8 +1917,9 @@ echo "<p>" . substr($text, 0, 140) . "</p>";
 
 #### Replacing characters
 
-To replace some text with some other text you can use str_replace()
+To replace some text with some other text you can use `str_replace()`
 
+```
 $original = "hello world";
 
 // first param = replace
@@ -1870,6 +1928,7 @@ $original = "hello world";
 $replaced = str_replace("world", "universe", $original);
 
 echo $replaced; // hello universe
+```
 
 There are lots more examples of string functions on the PHP website:
 
@@ -1883,7 +1942,8 @@ There are also lots of functions we could use to manipulate numbers:
 You could use `round()`, `floor()` and `ceil()` to round up or down a number with a decimal point, into a whole number
 
 ```
-$lower = 3.254; $upper = 3.836;
+$lower = 3.254;
+$upper = 3.836;
 
 echo round($lower); // === 3
 echo round($upper); // === 4
@@ -1897,9 +1957,9 @@ Could be useful for calculating an average rating for an item, site statistics, 
 
 #### Generating random numbers
 
-You can generate a random whole number with rand()
+You can generate a random whole number with `rand()`
 
-rand(1,10) will generate a random whole number between 1 and 10 (inclusive)
+`rand(1,10)` will generate a random whole number between 1 and 10 (inclusive)
 
 Could be used to display a random item from an array
 
@@ -1930,7 +1990,7 @@ This is a standard PHP array, we already know how to access an individual item:
 echo $planets[2]; // === "Earth"
 ```
 
-To pick a random entry from an array we can use rand()
+To pick a random entry from an array we can use `array_rand()`
 
 ```
 $rand = array_rand($planets);
@@ -1971,7 +2031,7 @@ There are lots more examples of array functions on the PHP website:
  - [http://www.php.net/manual/en/ref.array.php](http://www.php.net/manual/en/ref.array.php)
 
 
-### Using PHP Or MySQL To Sort Data
+### Using PHP or MySQL to sort data
 
 When choosing between sorting data with PHP or MySQL, it is more efficient to do as much as possible in the original SQL query
 
@@ -1982,7 +2042,9 @@ But it is more efficient to filter in the SQL query...
 ...unless you are going to re-use the data elsewhere
 
 
-### File Uploading
+### File uploading
+
+#### Client-side code
 
 We can use HTML forms to upload files to the server
 
@@ -2003,6 +2065,9 @@ Then in the form we add a new `<input>` element with a `type` attribute of `file
 This is all we have to do on the client-side to enable a file to be uploaded
 
 The rest of the work required to upload a file takes place on the server-side
+
+
+#### Server-side code
 
 We need to identify when a file has been uploaded
 
@@ -2053,7 +2118,7 @@ Be aware of security issues when allowing people to upload files to your server!
  - [http://www.zymic.com/tutorials/php/creating-a-file-upload-form-with-php/](http://www.zymic.com/tutorials/php/creating-a-file-upload-form-with-php/)
 
 
-### Displaying Images From A Database
+### Displaying images from a database
 
 You don't need to store images in your database in order to display images in your website
 
@@ -2063,7 +2128,7 @@ We've just seen how to upload a file
 
 As you upload a file you could store its file name in the database
 
-For example, when outputting data from the database, use the filename field as the src for an image:
+For example, when outputting data from the database, use the filename field as the `src` attribute for an image:
 
 ```
 <img src="images/'.$row['filename'].'" alt="'.$row['description'].'" />
@@ -2113,19 +2178,22 @@ You could use a third-party library, but these are often complex to set up
 
 ### Search
 
-To add a simple search field/page you can use a form
+To add a simple search field/page you can use an HTML form
 
 Identify the columns that you would like to search
 
 Use an SQL command such as:
 
 ```
-$query = "SELECT * FROM `answers` WHERE `answer` LIKE '%".$answer_search."%'";
+$query = "SELECT * FROM `answers` WHERE `answer` LIKE '%".$search_term."%'";
 ```
 
 This will return a list of all items in the database that match the query parameter
 
-We saw the str_replace function earlier
+
+#### Displaying active search query
+
+We saw the `str_replace()` function earlier
 
 We could use it to find the term that has been searched for, and making it bold
 
@@ -2149,7 +2217,7 @@ These range in size from small specific pieces of functionality up to blogs, sho
 
 Some are free and open source, others require payment
 
-Places like GitHub are great places to search for these scripts
+Websites like GitHub and Stack Overflow are great places to search for these scripts
 
 
 ## Security
@@ -2163,11 +2231,10 @@ They will try to find and exploit security flaws in your website
  - Sanitise input variables
  - Protect against SQL injection
  - Protect passwords
- - Improve session management
 
 Remove any unwanted or potentially harmful content before processing the information
 
- - Coutent output content to the browser
+ - Content output to the browser
  - Content added by a user into a form
  - Parameters used to create SQL queries
  - Content saved to a database
@@ -2175,7 +2242,7 @@ Remove any unwanted or potentially harmful content before processing the informa
 
 ### Displaying content
 
-When displaying content from the database we could improve our security:
+When displaying content from a database we could improve our security:
 
 ```
 // get a list of all questions in the database
@@ -2190,7 +2257,7 @@ while ($row = $result->fetch_assoc()) {
 
   // output content to page
   echo '
-    <li>'.$code.': <strong>'.$question.'</strong></li>
+    <li><strong>'.$question.'</strong></li>
   ';
 }
 ```
@@ -2219,7 +2286,7 @@ Essentially, the website is taking input from a user, storing it in a database, 
 If we don't sanitise the content before we output it:
 
  - Someone adding HTML to their content could affect the layout of our page
- - Someone adding PHP or JavaScript to their content could be far more malicious...
+ - Someone adding SQL, PHP or JavaScript to their content could be far more malicious...
 
 
 #### Test case
@@ -2340,7 +2407,7 @@ $sql = "SELECT * FROM `users` WHERE `surname` = '$_GET['name']'";
 Someone enters a value with an apostrophe, turning this SQL into:
 
 ```
-$sql = "SELECT * FROM `users` WHERE `surname` = '<strong>O'Connor</strong>'";
+$sql = "SELECT * FROM `users` WHERE `surname` = 'O'Connor'";
 ```
 
 (The extra apostrophe makes the query syntactically invalid...)
@@ -2360,7 +2427,7 @@ see also:
  - `" OR "a"="a`
  - `') OR ('a'='a`
 
-Think about a basic og-in script:
+Think about a basic log-in script:
 
 ```
 SELECT `username`, `password` FROM `users` WHERE `username` = '$_POST['u']' AND `password` = '$_POST['p']';
@@ -2395,14 +2462,6 @@ $username = mysqli_real_escape_string($db, $_POST['username']);
 
 This should be used on EVERY user input field
 
-Note that on some servers, slashes are automatically added to escape the extra apostrophes issue we saw earlier
-
-If this is the case, you will also need to remove these slashes:
-
-```
-$username = mysqli_real_escape_string($db, stripslashes($_POST['username']));
-```
-
 
 ### Prepared statements
 
@@ -2421,7 +2480,7 @@ $query = $db->prepare("INSERT INTO `users` (`username`, `password`, `name`) VALU
 Then bind the variables that you want to use in your query:
 
 ```
-$query->bind_param('ss', $lorem, $ipsum);
+$query->bind_param('sss', $lorem, $ipsum, $dolor);
 $query->execute();
 ```
 
@@ -2457,7 +2516,7 @@ $result = $db->query($sql);
 
 ```
 // prepare the query
-if ($query = $db->prepare("SELECT `id`, `username`, `name` FROM `users` WHERE `username` = ? `OR `password` = ?")) {
+if ($query = $db->prepare("SELECT `id`, `username` FROM `users` WHERE `username` = ? AND `password` = ?")) {
 
   // set the parameters to substitute for the ? in the query above
   $query->bind_param('ss', $_POST['username'], $_POST['password']);
@@ -2466,12 +2525,12 @@ if ($query = $db->prepare("SELECT `id`, `username`, `name` FROM `users` WHERE `u
   $query->execute();
 
   // set variable names for each field/attribute you're returning from the query
-  $query->bind_result($id, $username, $name);
+  $query->bind_result($id, $username);
 
   // loop through query results
   while ($query->fetch()) {
     echo '
-      <p>User: '.$id.' - '.$username.': '.$name.' </p>
+      <p>User: '.$id.' - '.$username.'</p>
     ';
   }
 
@@ -2528,11 +2587,11 @@ We need a way to encrypt passwords
 
 #### Hashing
 
-The method of encrypting passwords that we will use is known as hashing
+The most common method of encrypting passwords is known as hashing
 
 Hashing turns passwords into long random strings of text
 
-For example, the word password run through the `SHA-1` hashing algorithm is `5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8`
+For example, the word 'password' run through the `SHA-1` hashing algorithm is `5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8`
 
 It is a one-way process (easy to encrypt, difficult to decrypt)
 
@@ -2544,13 +2603,16 @@ It is highly unlikely that any two strings of text will generate an identical ha
 
 If someone were to access your database and steal your list of password hashes, they can't (easily) use these to reveal the actual passwords
 
+
+#### Hashing algorithms
+
 There are lots of different hashing algorithms available
 
 These will all take a string and convert it to a hash of a certain length (and complexity)
 
 They perform the same task in different ways, using different algorithms to calculate the hash
 
-To create a hash with PHP we can choose one of the different hashing functions
+To create a hash with PHP we can choose one of the many different hashing functions
 
 ```
 $string = 'password';
@@ -2621,9 +2683,7 @@ Modern computers can generate MD5 and SHA-1 hashes very quickly - thousands ever
 
 Hashes can be generated for every word in an entire dictionary
 
-You can suggest users set up strong passwords, which would provide a reasonable level of protection against such attacks...
-
-...but you cannot guarantee that your users will actually do this!
+You can suggest users set up strong passwords, which would provide a reasonable level of protection against such attacks...but you cannot guarantee that your users will actually do this!
 
 
 #### Password hashing with a salt
@@ -2671,6 +2731,9 @@ if (in_array($_FILES['upload']['type'], $allowedMimeTypes)) {
 }
 ```
 
+This is just a basic form of file detection, and can easily be fooled, but it does demonstrate the need to add security around file uploads
+
+
 ### File includes
 
 If you ever use a submitted variable as part of a file name or path, first use `basepath()` to filter it
@@ -2679,7 +2742,7 @@ If you ever use a submitted variable as part of a file name or path, first use `
 $filePath = basepath("/path/to/file.php"); // file.php
 ```
 
-This also avoids remote file inclusion
+This means malicious users are unable to trigger a remote file inclusion:
 
 ```
 $fileInclude = basepath("http://malicious.url/file.php");
@@ -2687,9 +2750,9 @@ $fileInclude = basepath("http://malicious.url/file.php");
 ```
 
 
-### Misc tips
+### Miscellaneous tips
 
-Don't differentiate betwen invalid usernames and passwords in error messages - If someone is trying to maliciously access an account, you shouldn't let them know that they've identified a valid username but the password is wrong
+Don't differentiate between invalid usernames and passwords in error messages - If someone is trying to maliciously access an account, you shouldn't let them know that they've identified a valid username but the password is wrong
 
 Limit the number of times someone can log in incorrectly - After a few attempts from the same IP address, consider blocking it, at least temporarily
 
@@ -2722,9 +2785,7 @@ We can also use this for repetitive content, information you only really want to
 
 ### File includes - HTML
 
-Let's say we're creating a form
-
-In this form we want to import a list of countries as a select dropdown list
+Let's say we're creating a form, in which we want to import a list of countries as a select dropdown list
 
 If it were a static HTML page:
 
@@ -2743,7 +2804,7 @@ If it were a static HTML page:
 </html>
 ```
 
-We could just include the HTML file at the relevant point:
+We could just include a file containing the HTML at the relevant point:
 
 ```
 <html>
@@ -2775,7 +2836,7 @@ If we had just a list of country names, we could recreate this programatically u
 
 Now rather than just inserting the file into the page, we'll need to read and process it with PHP
 
-To read the file we use the built-in PHP functions file() and file_get_contents()
+To read the file we use the built-in PHP functions `file()` and `file_get_contents()`
 
 ```
 <html>
@@ -2798,7 +2859,7 @@ We're now using 'raw' data that could be used elsewhere in different contexts
 
 We aren't restricted to doing this just from a local file on our server
 
-We could use file() and file_get_contents() to retrieve data from any URL*
+We could use `file()` and `file_get_contents()` to retrieve data from any URL*
 
 
 ### file() and file_get_contents()
@@ -2828,11 +2889,11 @@ useful when reading in the contents of a file or web page containing prose, code
 
 (remember that asterisk?)
 
-We can't use file() or file_get_contents() on many servers to access remote files
+We can't use `file()` or `file_get_contents()` on many servers to access remote files
 
 (they work fine for local files)
 
-Due to security issues - "code injection vulnerabilities" - we'll cover this in a later week
+This is due to security issues - "code injection vulnerabilities"
 
 There is an alternative way to import remote files from other servers, to work around the security concern
 
@@ -2856,14 +2917,16 @@ function file_curl($url) {
   return split("\n", file_get_contents_curl($url));
 }
 ```
-
 We are now using 'raw' data that could be used in other contexts
 
 We could also manipulate the data before outputting it
 
 PHP has lots of different functions to manipulate or sort arrays
 
-But the information is not structured
+
+### Structured Data
+
+The information we have just seen is not structured
 
 This method is fine for simple single-value information, not so good for complex data
 
@@ -2876,14 +2939,21 @@ There are a few options:
  - CSV
  - XML
  - JSON
- - Databases
 
 
 ### CSV
 
 Comma-separated values are another way to store information, often as plain-text static files
 
-Uses a similar storage technique as the last example, but this time we have separate items of data are separated with commas (or another agreed delimiter such as a tab)
+Uses a similar storage technique as the last example, but this time different items of data are separated with commas (or another agreed delimiter such as a tab)
+
+```
+England, Europe, English
+Switzerland, Europe, German Italian and French
+Brazil, South America, Portuguese
+```
+
+This information can then be processed:
 
 ```
 <?php
@@ -2893,13 +2963,17 @@ $countries = file("countries.csv");
 // loop through the array, one country at a time
 foreach ($countries as $country) {
 
-  // turn each country string into an array of separate values
-  // split on the comma
+  // turn each country string into an array of separate values, split on the comma
   $countryData = explode(",", $country, 4);
 
   // output country data!
-  echo "<p>Country " . $countryData[0] . ": ".$countryData[1] .
-  " - Languages: " . $countryData[3] . "</p>";
+  echo "
+    <p>
+      Country: " . $countryData[0] . ",
+      Location: ".$countryData[1] . ",
+      Languages: " . $countryData[3] . "
+    </p>
+  ";
 }
 ?>
 ```
@@ -2923,7 +2997,7 @@ Better systems exist for storing complex data
 
 ### XML
 
-eXtensible Markup Language
+_eXtensible Markup Language_
 
 "data interchange format"
 
@@ -2951,20 +3025,20 @@ It allows two systems written in different technologies to exchange data
 Most tags must have matching opening and closing tags
 
 ```
-<p>O Rose thou art sick.</p>
-<img src="filename.jpg" alt="Image description" />
+<tag>O Rose thou art sick.</tag>
+<selfclosing lorem="ipsum" />
 ```
 
 Tags should be 'properly nested'
 
 ```
-<p>O <strong>Rose</strong> thou art sick.</p>
+<tag>O <another>Rose</another> thou art sick.</tag>
 ```
 
 Tags should match case (just use lower-case)
 
 ```
-<strong>O Rose thou art sick.</strong>
+<tag>O Rose thou art sick.</tag>
 ```
 
 
@@ -2976,7 +3050,8 @@ But HTML is not strictly an XML format:
 
  - Don't need to close tags
  - Case-insensitive opening and closing tags
- - XHTML was an attempt to map XML rules onto HTML
+
+XHTML was an attempt to map XML rules onto HTML
 
 With HTML5 you can pick and choose whether you support XML or not
 
@@ -2985,7 +3060,7 @@ With HTML5 you can pick and choose whether you support XML or not
 
 As with the plain-text and CSV examples earlier, we can use PHP to parse XML files too
 
-We can load an XML file in to PHP using the simplexml_load_file() function
+We can load an XML file in to PHP using the `simplexml_load_file()` function
 
 
 ```
@@ -2994,9 +3069,13 @@ $countries = simplexml_load_file("countries.xml");
 
 // loop through the country data array
 foreach ($countries as $country) {
-  echo "<p>Country " . $country->id . ": ".
-    $country->names->english . " (Local name: " .
-    $country->names->local . ")>/p>";
+  echo "
+    <p>
+    Country " . $country->id . ": " .
+    $country->names->english . "
+    (Local name: " . $country->names->local . ")
+    </p>
+  ";
 }
 ```
 
@@ -3047,13 +3126,11 @@ Some examples:
 
 ### JSON
 
-JSON is used for similar reasons to XML - to share information between systems
+JSON is used for similar reasons to XML - to share complex information between systems
 
 It uses JavaScript syntax (as opposed to XML syntax) to store data
 
-JSON has advantages over XML:
-
-It is (usually) less dense (it requires less code) to describe data
+JSON has a big advantage over XML - it is (usually) less dense (it requires less code) to describe data
 
 This is important: when sharing vast quantities of data across a network you want it to be efficient
 
@@ -3061,9 +3138,12 @@ The smaller the file size (the fewer the characters) the better
 
 For users of the data, it often doesn't particularly matter if it is stored in XML or JSON format
 
+
+#### Using JSON with PHP
+
 As with the XML example, we can use PHP to parse JSON files
 
-We load a JSON file into PHP using file_get_contents(), then turn it into a PHP array using the json_decode() function
+We load a JSON file into PHP using `file_get_contents()`, then turn it into a PHP array using the `json_decode()` function
 
 ```
 // load the JSON file into a variable as a string
@@ -3074,11 +3154,15 @@ $countryData = json_decode($json, true);
 
 // loop through the country data array
 foreach ($countryData["countries"] as $country) {
-  echo "<p>Country " . $country["id"] . ": ".
-  $country["names"]["english"] . " (Local name: " .
-  $country["names"]["local"] . ")</p>";
+  echo "
+  <p>
+    Country " . $country["id"] . ": ".
+    $country["names"]["english"] . "
+    (Local name: " . $country["names"]["local"] . ")
+  </p>";
 }
 ```
+
 
 ### Why are XML and JSON important
 
@@ -3106,7 +3190,7 @@ Many websites now offer XML/JSON feeds
 
 Rather than storing data yourself, you can use third-party services to store and manage your data
 
-Why store photos when you can use flickr, why store short pieces of data when you can use twitter
+_Why store photos when you can use flickr, why store short pieces of data when you can use twitter_
 
 These companies won't give direct access to their databases to anyone
 
@@ -3116,4 +3200,4 @@ Data feeds generally allow us access to data, usually in XML/JSON format
 
 APIs are usually more complex as they often also allow us to manipulate data, so we can update content without having to visit the site itself
 
-We could consider using third-party services to replace a local database, or to provide supplimentary information about a selected item from our website
+We could consider using third-party services to replace a local database, or to provide supplementary information about a selected item from our website

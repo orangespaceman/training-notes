@@ -65,21 +65,20 @@ It wasn't always this way - *Internet Explorer 6...*
  - With a bit of practice, it's the quickest way to make things
  - It's easier to debug if something isn't working
  - Easy to make quick fixes from anywhere
- - There aren't that many HTML elements and CSS styles to learn!
 
 
 ## HTML
 
 Describes the structure of content - used to give structure to information
 
-It is a universal language - provided you have a web browser that is capable of reading HTML, you can use any operating systems or device to view it
+It is a universal language - provided you have a web browser that is capable of reading HTML, you can use any operating system or device to view it
 
 
 ### Giving structure with code
 
-We "mark up" a document to give it structure, by describing the meaning of its parts.
+We "mark up" a document to give it structure, by describing the meaning of its parts
 
-HTML is a type of "markup" language.
+HTML is a type of "markup" language
 
 
 ### How would we mark up a book?
@@ -168,7 +167,7 @@ Some tags are 'self-closing', because they don't wrap around content:
 
 #### Nesting tags
 
-Tags should be properly nested.
+Tags should be properly nested
 
 ***WRONG***
 
@@ -193,7 +192,7 @@ Tags should be properly nested.
 
 Tags should match case (just use lower-case)
 
-Note that this isn't a strict rule like the previous too, but should still be adhered to
+Note that this isn't a strict rule like the previous two, but should still be adhered to
 
 ***WRONG***
 
@@ -214,30 +213,9 @@ Note that this isn't a strict rule like the previous too, but should still be ad
 ```
 
 
-### Marking up with HTML
-
-HTML has a limited number of tags.
-
-It was originally designed for long, linear technical documents.
-
-It is now used for many things.
-
-HTML5 added many new tags for different content.
-
-There aren't enough tags for every scenario.
-
-How do you decide which HTML tag to use?
-
-Tags are semantic - they have different meanings.
-
-There is no right or wrong answer.
-
-View the source code for websites you visit.
-
-
 ### Attributes
 
-Extra information for a tag can be given with attributes in the opening tag.
+Extra information for a tag can be given with attributes in the opening tag
 
 ```
 <a href="http://google.com">Go to Google</a>
@@ -248,11 +226,11 @@ Extra information for a tag can be given with attributes in the opening tag.
 
 ### Classes and IDs
 
-Sometimes you'll want to add styling or interactivity to only certain parts of a page.
+Sometimes you'll want to add styling or interactivity to only certain parts of a page
 
-For example, you might want to make a paragraph look bigger.
+For example, you might want to make a paragraph look bigger
 
-We can target specific HTML elements through their id or class attributes.
+We can target specific HTML elements through their `id` or `class` attributes
 
 ```
 <p id="intro">Lorem ipsum dolor sit amet</p>
@@ -296,6 +274,20 @@ An element can only have one ID
 
 Each ID should only be used once on each page
 
+
+### Marking up with HTML
+
+HTML has a limited number of tags, as it was originally designed for long, linear technical documents
+
+It is now used for many things - there aren't enough tags for every possible scenario
+
+How do you decide which HTML tag to use?
+
+Tags are semantic - they have different meanings
+
+There is no right or wrong answer
+
+View the source code for websites you visit
 
 
 ### Example
@@ -352,9 +344,16 @@ Accessibility - With compliant code, any browsing device can render it
  - [http://validator.w3.org/](http://validator.w3.org/)
 
 
+***Further information:***
+
+ - [http://www.htmldog.com/](http://www.htmldog.com/)
+ - [https://www.codecademy.com/tracks/web](https://www.codecademy.com/tracks/web)
+ - [http://learn.shayhowe.com/html-css/](http://learn.shayhowe.com/html-css/)
+
+
 ## CSS
 
-CSS Makes Pages Pretty
+CSS makes pages pretty
 
  - HTML lets us add content - text, images and video
  - CSS adds style - layout, colours, fonts
@@ -371,6 +370,24 @@ All aspects of design and layout are covered by CSS
 
 
 ### Adding CSS
+
+Assuming we want to style the following HTML page:
+
+```
+<html>
+    <head>
+        <title>My web page about biscuits</title>
+    </head>
+    <body>
+        <h1>Best Biscuits</h1>
+        <p id="intro">This is a list of the best biscuits</p>
+        <ul class="biscuits">
+            <li>Chocolate Hobnob</li>
+            <li class="ginger">Ginger Nut</li>
+        </ul>
+    </body>
+</html>
+```
 
 #### Styling by tag name
 
@@ -423,10 +440,10 @@ Instead of separate styles for everything:
 
 ```
 p {
-    color:red;
+    color: red;
 }
 h1 {
-    color:red;
+    color: red;
 }
 ```
 
@@ -434,7 +451,7 @@ You can combine styles:
 
 ```
 p, h1 {
-    color:red;
+    color: red;
 }
 ```
 
@@ -487,76 +504,11 @@ h1 {
 }
 ```
 
+***Further information:***
 
-## Web Standards
-
-### What are web standards?
-
-An 'agreed' specification for HTML, CSS and JavaScript
-
- - How we should write code
- - How web browsers should read and render code
-
-Allow web developers to focus on their code
-
-If the code is valid, the page should render in a web browser as expected
-
-A good example comes from the history of the `<img>` element:
-
- - [A long digression into how standards are made](http://diveintohtml5.info/past.html#history-of-the-img-element)
-
-
-### A short summary of web standards
-
- - Use valid, semantic HTML for content
- - Use CSS for layout
- - Use JavaScript for behaviour
-
-Web standards define rules for accessibility
-
-> "The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect."
-> 
-> — [W3C Web Content Accessibility Guidelines](http://www.w3.org/TR/WCAG20/)
-
-
-### Why are web standards important?
-
-Tim Berners-Lee created HTML as a language to help represent information in a consistent manner.
-
-If everyone can agree on a shared vocabulary, then a web browser should be able to interpret what I have created and display it to you in a predictable way.
-
-This was overseen by the W3C, who defined standards that should be followed by all.
-
-This was a good plan in theory. Until the web became more popular than anyone could have imagined.
-
-In the early days of the web, competing web browsers were created, and in an attempt to win market share, numerous new features were introduced that weren't available in rival browsers. New elements, new ways to lay out and interact with web pages.
-
-On the one hand, this led to a great deal of innovation. Which, in theory, is a good thing. But in practice...
-
-This fragmentation caused a great deal of problems for developers, and web users alike.
-
-To create a website that worked everywhere often meant creating the same thing twice, in two different ways. Or, more commonly, building a website and optimising it just for a single browser.
-
-Browser manufacturers wanted to implement new functionality, web developers wanted to be able to do that weren't possible in a browser, because of a lack of agreement for how to implement them.
-
-Groups of developers formed collectives such as the Web Standards Project (WaSP) to convince rival browser manufacturers to embrace the common standards set out by the W3C, for the benefit of all.
-
-It took a number of years for their message to be heard, but eventually the major browser manufacturers realised the approach would benefit them too.
-
-
-### Web standards today
-
-Web standards are still relevant today - we have a range of desktop and mobile browsers
-
-To ensure these browsers operate in a consistent manner they must continue to follow a mutually agreed set of design principles and rules
-
-To get anything built efficiently, developers need consensus. We need to know that what we build will work.
-
-The difference today is, with web standards, we have some reassurance that this is indeed the case.
-
-The browser manufacturers themselves are now actively involved in the process of defining the new standards for HTML, CSS and JavaScript.
-
-They (mostly) follow agreed standards and conventions when creating these innovations, meaning innovative features can be reliably implemented to create an experience that works in any browser.
+ - [http://www.htmldog.com/](http://www.htmldog.com/)
+ - [https://www.codecademy.com/tracks/web](https://www.codecademy.com/tracks/web)
+ - [http://learn.shayhowe.com/html-css/](http://learn.shayhowe.com/html-css/)
 
 
 ## Page layout with CSS
@@ -568,7 +520,7 @@ It's important to know the difference between the two
 
 ### Block Elements:
 
-H1-H6, P, UL, OL, LI, DIV, TABLE, FORM…
+`<h1>`-`<h6>`, `<p>`, `<ul>`, `<ol>`, `<li>`, `<div>`, `<table>`, `<form>`, etc
 
  - sit on their own line
  - fill 100% of page width
@@ -576,7 +528,7 @@ H1-H6, P, UL, OL, LI, DIV, TABLE, FORM…
 
 ### Inline elements
 
-A, EM, STRONG, SPAN, CODE…
+`<a>`, `<em>`, `<strong>`, `<span>`, etc
 
  - Will sit next to one another on the same line
  - Don't always automatically receive all CSS styles (padding/margin/width/height etc) - this can be confusing!
@@ -584,9 +536,10 @@ A, EM, STRONG, SPAN, CODE…
 
 Easy to alter with CSS - `display: block` or `display: inline`
 
-See: http://www.quirksmode.org/css/display.html
+See:
 
-See also `display: inline-block`
+ - [http://www.quirksmode.org/css/display.html](http://www.quirksmode.org/css/display.html)
+ - [http://learnlayout.com/inline-block.html](http://learnlayout.com/inline-block.html)
 
 
 ### Layout
@@ -612,7 +565,7 @@ By default, all HTML elements have a CSS position attribute of `static`
 #main,
 #sidebar,
 #footer {
-  position:static; /* this is the default value */
+  position: static; /* this is the default value */
 }
 ```
 
@@ -622,21 +575,21 @@ Changing the CSS position attribute allows you to set top/bottom/left/right valu
 
 ```
 #main {
-  position:absolute;
-  left:10px;
-  width:75%;
-  background:#eee;
+  position: absolute;
+  left: 10px;
+  width: 75%;
+  background: #eee;
 }
 
 #sidebar {
-  position:absolute;
-  right:10px;
-  width:20%;
-  background:#ffd;
+  position: absolute;
+  right: 10px;
+  width: 20%;
+  background: #ffd;
 }
 ```
 
-A page laid out using position:absolute has its limits
+A page laid out using `position: absolute` has its limits
 
  - 'fixed' heights of content
  - layout doesn't adapt to the content
@@ -646,19 +599,19 @@ A page laid out using position:absolute has its limits
 
 ### Floats
 
-HTML elements can have a float set with CSS - `float:left;` or `float:right;`
+HTML elements can have a float set with CSS - `float: left;` or `float: right;`
 
 ```
 #main {
-  background:#eee;
-  float:left;
-  width:80%;
+  background: #eee;
+  float: left;
+  width: 80%;
 }
 
 #sidebar {
-  background:#ffd;
-  float:right;
-  width:15%;
+  background: #ffd;
+  float: right;
+  width: 15%;
 }
 ```
 
@@ -668,11 +621,14 @@ If we float another element in the same direction, it will be shifted until its 
 
 Unfloated content flows and wraps around floated elements
 
-Floats work better for layout - unlike absolutely positioned elements, floated elements remain in the document flow, so can expand with content
+Floats are better that positioning for layout - unlike absolutely positioned elements, floated elements remain in the document flow, so can expand with content
 
 You should (almost) always set widths on floated elements, although elements with inherent widths (e.g. images) don't need a width set
 
-If we want to control how many appear on a line, we can wrap a div element around the floated content, and set a width.
+
+#### Controlling floats
+
+If we want to control how many floated elements appear on a line, we can wrap a div element around the floated content, and set a width:
 
 ```
 <div id="block-container">
@@ -684,7 +640,7 @@ If we want to control how many appear on a line, we can wrap a div element aroun
 
 ```
 #block-container {
-  width:500px;
+  width: 500px;
 }
 .block {
   float: left;
@@ -693,18 +649,20 @@ If we want to control how many appear on a line, we can wrap a div element aroun
 }
 ```
 
-Two main uses for floats:
+#### Two main uses for floats:
 
  - page layout
  - layout of elements within a block
 
 
+#### float: centre?
+
 You can't float an element to the centre - there are other techniques for that
 
 ```
 body {
-  width:600px;
-  margin:0 auto;
+  width: 600px;
+  margin: 0 auto;
 }
 ```
 
@@ -730,7 +688,7 @@ These devices also have different methods of interaction
 
 ### Media queries
 
-You can specify CSS for different browser resolutions (or dimensions) using CSS @media queries.
+You can specify CSS for different browser resolutions (or dimensions) using CSS `@media` queries.
 
 For a typical website you might create three sets of styles:
 
@@ -746,22 +704,22 @@ These media queries can appear inline in the CSS:
 @media (max-width: 480px) {
   #main-content,
   #aside {
-    width:100%;
-    float:none;
+    width: 100%;
+    float: none;
   }
 }
 ```
 
-Styles put within the @media query will only be used if the specified conditions are true.
+Styles put within the `@media` query will only be used if the specified conditions are true.
 
-Using @media queries to create different layouts for different resolutions (or browser dimensions) is generally known as responsive web design
+Using `@media` queries to create different layouts for different resolutions (or browser dimensions) is generally known as responsive web design
 
 Content layout should adapt to fit different browser sizes
 
 
 ### Meta viewport
 
-You can control how a page renders in a (modern) mobile browser using a new `<meta>` tag:
+You can control how a page renders in a (modern) mobile browser using a `<meta>` viewport declaration:
 
 ```
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -770,11 +728,11 @@ You can control how a page renders in a (modern) mobile browser using a new `<me
 
 ### Mobile first
 
-It is possible to make an existing site more responsive by adding additional styles (within an @media query) for mobile devices
+It is possible to make an existing site more responsive by adding additional styles (within an `@media` query) for mobile devices
 
 Bandwidth issues for desktop browsers are less relevant nowadays with broadband, but is still a concern for mobile browsers
 
-Using @media queries means a mobile must download an entire desktop site, and then extra styles
+Using `@media` queries means a mobile must download an entire desktop site, and then extra styles
 
 It may make more sense to first create a basic design for mobile, and then add extra layout styles for desktop browsers
 
@@ -784,9 +742,9 @@ This approach is device-inclusive
 
 The default set of styles sent to every browser/device should be for the most basic page layout
 
-In this capacity, a lack of @media query support should be seen as your first @media query
+In this capacity, a lack of `@media` query support should be seen as your first `@media` query
 
-i.e. old browsers or devices don't support @media queries, so these devices receive the default mobile version
+i.e. old browsers or devices don't support `@media` queries, so these devices receive the default mobile version
 
 
 ***Further information:***
@@ -798,3 +756,78 @@ i.e. old browsers or devices don't support @media queries, so these devices rece
  - [http://marcdrummond.com/web-standards/2011/06/20/hell-bad-devices-responsive-web-design-and-web-standards](http://marcdrummond.com/web-standards/2011/06/20/hell-bad-devices-responsive-web-design-and-web-standards)
  - [http://stefangirard.com/2012/01/responsive-design-is-bad/](http://stefangirard.com/2012/01/responsive-design-is-bad/)
  - [http://www.webdesignshock.com/responsive-design-problems/](http://www.webdesignshock.com/responsive-design-problems/)
+
+
+
+## Web Standards
+
+### What are web standards?
+
+An 'agreed' specification for HTML, CSS and JavaScript
+
+ - How we should write code
+ - How web browsers should read and render code
+
+Web standards allow web developers to focus on their code
+
+If the code is valid, the page should render in a web browser as expected
+
+A good example comes from the history of the `<img>` element:
+
+ - [A long digression into how standards are made](http://diveintohtml5.info/past.html#history-of-the-img-element)
+
+
+#### A short summary of web standards
+
+ - Use valid, semantic HTML for content
+ - Use CSS for layout
+ - Use JavaScript for behaviour
+
+
+### Web standards and accessibility
+
+Web standards define rules for accessibility
+
+> "The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect."
+>
+> — [W3C Web Content Accessibility Guidelines](http://www.w3.org/TR/WCAG20/)
+
+
+### Why are web standards important?
+
+Tim Berners-Lee created HTML as a language to help represent information in a consistent manner
+
+If everyone can agree on a shared vocabulary, then a web browser should be able to interpret what I have created and display it to you in a predictable way
+
+This was overseen by the W3C, who defined standards that should be followed by all
+
+This was a good plan in theory - until the web became more popular than anyone could have imagined
+
+In the early days of the web, competing web browsers were created, and in an attempt to win market share, numerous new features were introduced that weren't available in rival browsers. New elements, new ways to lay out and interact with web pages
+
+On the one hand, this led to a great deal of innovation. Which, in theory, is a good thing. But in practice... it led to fragmentation in how browsers rendered HTML
+
+This fragmentation caused a great deal of problems for developers, and web users alike
+
+To create a website that worked everywhere often meant creating the same thing twice, in two different ways. Or, more commonly, building a website and optimising it just for a single browser
+
+Browser manufacturers wanted to implement new functionality, web developers wanted to be able to do that weren't possible in a browser, because of a lack of agreement for how to implement them
+
+Groups of developers formed collectives such as the Web Standards Project (WaSP) to convince rival browser manufacturers to embrace the common standards set out by the W3C, for the benefit of all
+
+It took a number of years for their message to be heard, but eventually the major browser manufacturers realised the approach would benefit them too
+
+
+### Web standards today
+
+Web standards are still relevant today - we have a range of desktop and mobile browsers
+
+To ensure these browsers operate in a consistent manner they must continue to follow a mutually agreed set of design principles and rules
+
+To get anything built efficiently, developers need consensus. We need to know that what we build will work
+
+The difference today is, with web standards, we have some reassurance that this is indeed the case
+
+The browser manufacturers themselves are now actively involved in the process of defining the new standards for HTML, CSS and JavaScript
+
+They (mostly) follow agreed standards and conventions when creating these innovations, meaning innovative features can be reliably implemented to create an experience that works in any browser
