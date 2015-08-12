@@ -1232,9 +1232,9 @@ If you have an HTML element that you are going to manipulate via JavaScript, giv
  - [http://davidwalsh.name/css-do](http://davidwalsh.name/css-do)
 
 
-### Turnary operators
+### Ternary operators
 
-Turnary operators are quick ways to write an if/else statement that sets a single value:
+Ternary operators are quick ways to write an if/else statement that sets a single value:
 
 ```
 if (planet === "Earth") {
@@ -1250,7 +1250,7 @@ Can be rewritten as:
 var dinner = (planet === "Earth") ? "chips" : "salad";
 ```
 
-Consider brevity vs legibility when considering whether to use turnary operators.
+Consider brevity vs legibility when considering whether to use ternary operators.
 
 ***Further reading:***
 
