@@ -1892,11 +1892,11 @@ To change the case of a text string we can use `strtolower()` or `strtoupper()`
 
 ```
 $firstname = "Pete";
-$surname = "Goodman";
+$surname = "Blah";
 
 echo "<p>" . strtolower($firstname) . " " .strtoupper($surname) . "</p>";
 
-// <p>pete GOODMAN</p>
+// <p>pete BLAH</p>
 ```
 
 #### Limiting characters

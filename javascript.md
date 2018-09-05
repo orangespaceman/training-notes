@@ -9,7 +9,7 @@ These notes assume a small amount of prior knowledge of programming in general a
 
 ### Variables
 
-An analogy often used to describe a variable is *a container that you can put something in*. 
+An analogy often used to describe a variable is *a container that you can put something in*.
 
 The name that you give a variable is the label you put on the container, so you know how to find it again later. They can be used to store anything - numbers, text or other types of information:
 
@@ -1646,6 +1646,7 @@ Closures are a useful method of creating complex functionality while protecting 
 
 ***Further reading***
 
+ - [http://renderedtext.com/blog/2015/11/18/closures-are-not-magic/](http://renderedtext.com/blog/2015/11/18/closures-are-not-magic/)
  - [https://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/](https://javascriptweblog.wordpress.com/2010/10/25/understanding-javascript-closures/)
 
 
@@ -2303,7 +2304,7 @@ There are several pros and cons that should be considered when making a decision
  - The maturity of a JavaScript framework should be evaluated before it is used. New frameworks especially can change significantly, which could lead to large code rewrites.
  - Choosing a JavaScript framework can involve a long-term commitment and significant investment, based on an open source solution.
 
-JavaScript frameworks are not the right choice for every project. If you’re building a website that still relies on the server for most of its logic, and if JavaScript is used primarily to make things a little more interactive, then a complex JavaScript framework may be overkill. 
+JavaScript frameworks are not the right choice for every project. If you’re building a website that still relies on the server for most of its logic, and if JavaScript is used primarily to make things a little more interactive, then a complex JavaScript framework may be overkill.
 
 
 ### Popular Frameworks
@@ -2414,7 +2415,7 @@ Many of these tools are built and configured using JavaScript.
 
 ## Dependency management
 
-Most websites rely on third-party libraries and frameworks - jQuery being the most obvious and popular example. 
+Most websites rely on third-party libraries and frameworks - jQuery being the most obvious and popular example.
 
 It may be fairly quick to manually download and add these third-party dependencies straight into the codebase, but using a *package manager* can simplify the management, installation and updating of these dependencies - especially handy when working across a team.
 
