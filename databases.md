@@ -74,7 +74,7 @@ If we were to imagine our example data in tabular form, we might have something 
 
 | id | name | handle         | question         | answer        | categories     | date_added          |
 |----|------|----------------|------------------|---------------|----------------|---------------------|
-| 1  | Pete | thegingerbloke | Favourite Cheese | Edam          | serious        | 2013-03-21 18:34:23 |
+| 1  | Pete | blah           | Favourite Cheese | Edam          | serious        | 2013-03-21 18:34:23 |
 | 2  | Rich | rich_xyz       | Favourite Prince | Fresh         | funny, winner  | 2013-03-21 19:25:16 |
 | 3  | Nick | something      | Favourite Prince | TAFKAP        | serious, funny | 2013-03-21 20:12:01 |
 | 4  | Mike | dangerous      | Favourite Cheese | Melted cheese | funny, winner  | 2013-03-21 19:25:16 |
@@ -219,7 +219,7 @@ Here are three of our example tables:
 
 | id |  handle        | name |
 |----|----------------|------|
-| 1  | thegingerbloke | Pete |
+| 1  | blah           | Pete |
 
 
 ***Categories table***
@@ -582,7 +582,7 @@ INSERT INTO `questions` (`id`, `question`, `date_added`) VALUES
 (4, 'Who''s your favourite queen?', '2013-03-09 19:45:42');
 
 INSERT INTO `users` (`id`, `handle`, `name`) VALUES
-(1, 'thegingerbloke', 'Pete'),
+(1, 'blah', 'Pete'),
 (2, 'rich_xyz', 'Rich'),
 (3, 'something', 'Nick'),
 (4, 'dangerous', 'Mike');
@@ -690,7 +690,7 @@ We need to add clauses to match the primary keys and foreign keys
 
 | id | handle         | name |
 |----|----------------|------|
-| 1  | thegingerbloke | Pete |
+| 1  | blah           | Pete |
 | 2  | something      | Nick |
 | 3  | dangerous      | Mike |
 
@@ -710,8 +710,8 @@ ON
 
 | id | user_id | answer                                          | date_added          | handle          | name |
 |----|---------|-------------------------------------------------|---------------------|-----------------|------|
-| 1  | 1       | lorem ipsum                                     | 2013-03-21 18:34:23 | thegingerbloke  | Pete |
-| 2  | 1       | quidquid Latine dictum sit altum videtur        | 2013-03-21 19:32:17 | thegingerbloke  | Pete |
+| 1  | 1       | lorem ipsum                                     | 2013-03-21 18:34:23 | blah            | Pete |
+| 2  | 1       | quidquid Latine dictum sit altum videtur        | 2013-03-21 19:32:17 | blah            | Pete |
 | 3  | 2       | Lorem ipsum dolor sit amet                      | 2013-03-21 20:31:25 | something       | Nick |
 | 4  | 3       | quidquid Latine                                 | 2013-03-21 21:32:17 | dangerous       | Mike |
 | 5  | 2       | ullamco laboris nisi ut aliquip ex ea commodo   | 2013-03-21 22:31:25 | something       | Nick |
@@ -734,8 +734,8 @@ WHERE
 
 | id | user_id | answer                                          | date_added          | handle          | name |
 |----|---------|-------------------------------------------------|---------------------|-----------------|------|
-| 1  | 1       | lorem ipsum                                     | 2013-03-21 18:34:23 | thegingerbloke  | Pete |
-| 2  | 1       | quidquid Latine dictum sit altum videtur        | 2013-03-21 19:32:17 | thegingerbloke  | Pete |
+| 1  | 1       | lorem ipsum                                     | 2013-03-21 18:34:23 | blah            | Pete |
+| 2  | 1       | quidquid Latine dictum sit altum videtur        | 2013-03-21 19:32:17 | blah            | Pete |
 
 
 #### SELECT without joins
