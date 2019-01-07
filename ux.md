@@ -454,6 +454,10 @@ Complex information architecture documents can take a great deal of time, withou
 
 The lower the definition, the better the discussion/feedback
 
+***Further reading:***
+
+ - [https://bigmedium.com/ideas/only-one-deliverable-matters.html](https://bigmedium.com/ideas/only-one-deliverable-matters.html)
+
 
 ### Content
 
